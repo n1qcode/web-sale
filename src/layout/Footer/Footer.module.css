@@ -1,0 +1,117 @@
+.footer {
+	display: grid;
+
+	align-items: center;
+
+	padding: 50px 0;
+
+	color: var(--white);
+	background: var(--black);
+
+	grid-template-columns: auto 132px auto 340px auto;
+
+	grid-template-areas: ". logo buttons text .";
+}
+
+.logo {
+	display: grid;
+	grid-area: logo;
+	grid-template-columns: repeat(3, auto);
+	grid-template-rows: repeat(2, auto);
+	grid-template-areas:
+		". icon ."
+		"text text text";
+
+	justify-content: center;
+	gap: 13px 0;
+}
+
+.logoIcon {
+	grid-area: icon;
+}
+
+.logoText {
+	grid-area: text;
+}
+
+.buttons {
+	display: grid;
+	grid-area: buttons;
+	grid-template-columns: repeat(6, auto);
+	gap: 25px;
+}
+
+.lastButton {
+	margin-left: 20px;
+	padding: 5px 24px;
+}
+
+.text {
+	grid-area: text;
+
+	width: 340px;
+}
+
+@media (max-width: 1150px) {
+	.footer {
+		grid-template-columns: auto 132px 421px auto;
+		grid-template-rows: auto auto;
+
+		padding: 22px 0;
+
+		grid-template-areas:
+			". buttons buttons ."
+			". logo text .";
+
+		gap: 20px 20px;
+	}
+
+	.logo {
+		margin-left: 100px;
+	}
+
+	.text {
+		margin-left: 100px;
+	}
+}
+
+@media (max-width: 737px) {
+	.footer {
+		grid-template-columns: auto 328px auto;
+		grid-template-rows: auto auto auto;
+
+		padding: 32px 0;
+
+		grid-template-areas:
+			". buttons ."
+			". logo ."
+			". text .";
+
+		gap: 20px 20px;
+	}
+
+	.buttons {
+		display: flex;
+		gap: 25px;
+
+		flex-direction: column;
+
+		align-items: center;
+	}
+
+	.logo {
+		margin: 0;
+	}
+
+	.text {
+		margin: 0;
+		display: flex;
+		text-align: center;
+		width: 315px;
+	}
+
+	.lastButton {
+		margin-left: 0 !important;
+	}
+}
+

@@ -1,0 +1,41 @@
+.slider {
+    display: flex;
+    align-items: center;
+    margin-top: 311px;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.imgs {
+    overflow: hidden;
+    flex-basis: 720px;
+}
+
+.imgs ul {
+    display: flex;
+    padding: 0;
+    transition: 0.5s ease-out;
+}
+
+.imgs ul li {
+    margin: 0 20px;
+}
+
+.imgs ul li img {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    user-select: none;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.btnLeft {
+    margin-right: 20px;
+}
+
+.btnRight {
+    margin-left: 20px;
+}

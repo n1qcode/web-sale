@@ -1,0 +1,134 @@
+.calculate {
+	display: grid;
+	grid-template-columns: auto 620px 520px auto;
+	grid-template-rows: auto auto 225px;
+	gap: 50px;
+
+	grid-template-areas:
+		". header icon ."
+		". text icon ."
+		". button icon .";
+
+	z-index: 1;
+}
+
+.title {
+	grid-area: header;
+}
+
+.text {
+	grid-area: text;
+}
+
+.buttonBlock {
+	position: relative;
+	grid-area: button;
+}
+
+.bigIcon {
+	grid-area: icon;
+
+	position: relative;
+
+	display: flex;
+	justify-content: center;
+}
+
+.button {
+	position: relative;
+	z-index: 1;
+
+	width: 330px;
+	height: 60px;
+}
+
+.label {
+	position: absolute;
+	right: 290px;
+	top: 57px;
+
+	width: 23px;
+	height: 83px;
+}
+
+.logo {
+	width: 567px;
+	height: 567px;
+}
+
+.mobileLogo {
+	display: none;
+	width: 328px;
+	height: 328px;
+}
+
+@media (max-width: 1307px) {
+	.calculate {
+		grid-template-columns: auto 620px auto;
+		grid-template-rows: auto auto 138px 537px;
+
+		grid-template-areas:
+			". header ."
+			". text ."
+			". button ."
+			". icon .";
+
+		margin-bottom: 90px;
+	}
+
+	.buttonBlock {
+		display: flex;
+		justify-content: center;
+	}
+
+	.label {
+		right: 143px;
+	}
+}
+
+@media (max-width: 737px) {
+	.calculate {
+		grid-template-columns: auto 328px auto;
+		grid-template-rows: auto auto 138px 190px;
+
+		grid-template-areas:
+			". header ."
+			". text ."
+			". button ."
+			". icon .";
+
+		gap: 30px;
+	}
+
+	.title {
+		font-size: 45px !important;
+		font-weight: 500 !important;
+		line-height: 45px !important;
+	}
+
+	.text {
+		font-size: 20px !important;
+		font-weight: 300 !important;
+		line-height: 24px !important;
+	}
+
+	.label {
+		right: 0;
+	}
+
+	.logo {
+		display: none;
+	}
+
+	.mobileLogo {
+		display: block;
+		top: -70px;
+		position: absolute;
+	}
+}
+
+@media (max-width: 445px) {
+	.calculate {
+		grid-template-columns: auto 297px auto;
+	}
+}

@@ -1,0 +1,185 @@
+.wrapper {
+	position: relative;
+
+	display: grid;
+
+	min-height: 100vh;
+	grid-template-columns: auto minmax(320px, auto) auto;
+	grid-template-rows: auto 1fr auto;
+	gap: 100px 0;
+
+	grid-template-areas:
+		"header header header"
+		"body body body"
+		"footer footer footer";
+}
+
+.header {
+	grid-area: header;
+}
+
+.sidebar {
+	grid-area: sidebar;
+}
+
+.body {
+	grid-area: body;
+
+	z-index: 1;
+}
+
+.footer {
+	grid-area: footer;
+}
+
+.helpIconRightBlackHeader {
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.airplane {
+	position: absolute;
+	top: 248px;
+}
+
+.bodyDescripLeftBottomBlack {
+	position: absolute;
+	top: 1277px;
+	z-index: 1;
+}
+
+.bodyDescripLeftTopBlack {
+	position: absolute;
+	top: 1189px;
+	z-index: 1;
+}
+
+.bodyDescripLeftTopPrimary {
+	position: absolute;
+	top: 1226px;
+}
+
+.bodyDescripRightBottomBlack {
+	position: absolute;
+	top: 1277px;
+	z-index: 1;
+	right: 0;
+}
+
+.bodyDescripRightTopBlack {
+	position: absolute;
+	top: 1142px;
+	z-index: 1;
+	right: 0;
+}
+
+.bodyDescripRightTopPrimary {
+	position: absolute;
+	top: 1072px;
+	right: 0;
+}
+
+.helpIconLeftBlack {
+	position: absolute;
+	z-index: 1;
+	bottom: 195px;
+	left: 0;
+}
+
+.helpIconRightBlack {
+	position: absolute;
+	z-index: 1;
+	right: 0;
+	bottom: 195px;
+}
+
+.helpIconLeftPrimary {
+	position: absolute;
+	bottom: 195px;
+	left: 0;
+}
+
+.helpIconRightPrimary {
+	position: absolute;
+	right: 0;
+	bottom: 195px;
+}
+
+@media (max-width: 1465px) {
+	.airplane {
+		display: none;
+	}
+}
+
+@media (max-width: 1353px) {
+	.bodyDescripLeftBottomBlack, .bodyDescripLeftTopBlack, 	.bodyDescripLeftTopPrimary, .bodyDescripRightBottomBlack, 	.bodyDescripRightTopBlack, .bodyDescripRightTopPrimary {
+		display: none;
+	}
+}
+
+@media (max-width: 1307px) {
+	.helpIconRightBlackHeader {
+		position: absolute;
+		top: -105px;
+
+		width: 629px;
+		height: 366px;
+	}
+}
+
+@media (max-width: 800px) {
+	.helpIconRightBlackHeader {
+		top: -110px;
+		width: 515px;
+	}
+}
+
+@media (max-width: 737px) {
+	.wrapper {
+		grid-template-columns: minmax(320px, auto);
+
+		grid-template-areas:
+			"header"
+			"body"
+			"footer";
+	}
+
+	.helpIconRightBlackHeader {
+		top: -115px;
+		width: 405px;
+	}
+
+	.helpIconLeftBlack {
+		display: none;
+	}
+
+	.helpIconRightBlack {
+		display: none;
+	}
+
+	.helpIconLeftPrimary {
+		display: none;
+	}
+
+	.helpIconRightPrimary {
+		display: none;
+	}
+}
+
+@media (max-width: 575px) {
+	.header {
+		grid-template-columns: 132px auto 360px;
+	}
+
+	.helpIconRightBlackHeader {
+		top: -107px;
+		width: 580px;
+	}
+}
+
+@media (max-width: 400px) {
+	.helpIconRightBlackHeader {
+		width: 418px;
+	}
+}
