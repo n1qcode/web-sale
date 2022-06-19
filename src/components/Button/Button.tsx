@@ -12,7 +12,8 @@ export const Button = ({ arrow, volume, border, appearance, children, className,
             [styles.standard]: volume == 'standard',
             [styles.longer]: volume == 'longer',
             [styles.long]: volume == 'long',
-            [styles.border]: border == true
+            [styles.border]: border == true,
+            [styles.arrow]: arrow == 'text'
         })}
                 {...props}
         >

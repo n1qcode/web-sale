@@ -1,14 +1,50 @@
+.sliderBlock {
+    display: grid;
+    grid-template-columns: auto 1280px auto;
+    grid-template-rows: repeat(3, auto);
+
+    grid-template-areas:
+        ". header ."
+		". text ."
+        ". slider .";
+
+    z-index: 1;
+    margin-top: 135px;
+    gap: 25px;
+    margin-left: 75px;
+}
+
 .slider {
     display: flex;
     align-items: center;
-    margin-top: 311px;
-    margin-bottom: 50px;
     justify-content: center;
+    grid-area: slider;
+    margin-left: -80px;
+}
+
+.header {
+    grid-area: header;
+}
+
+.text {
+    grid-area: text;
+    width: 1075px;
+}
+
+.sliderHeader {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.sliderText {
+    margin-bottom: 40px;
+    width: 327px;
+    height: 50px;
 }
 
 .imgs {
     overflow: hidden;
-    flex-basis: 720px;
+    flex-basis: 1161px;
 }
 
 .imgs ul {
@@ -22,8 +58,8 @@
 }
 
 .imgs ul li img {
-    width: 200px;
-    height: 200px;
+    width: 347px;
+    height: 282px;
     object-fit: contain;
     user-select: none;
 }

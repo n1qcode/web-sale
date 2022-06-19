@@ -3,8 +3,9 @@
 }
 
 .s {
-	font-size: 12px;
-	line-height: 15px;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: 300 !important;
 }
 
 .m {
