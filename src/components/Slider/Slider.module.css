@@ -1,12 +1,13 @@
 .sliderBlock {
     display: grid;
     grid-template-columns: auto 1280px auto;
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(4, auto);
 
     grid-template-areas:
         ". header ."
 		". text ."
-        ". slider .";
+        ". slider ."
+        ". dots .";
 
     z-index: 1;
     margin-top: 135px;
@@ -20,6 +21,28 @@
     justify-content: center;
     grid-area: slider;
     margin-left: -80px;
+}
+
+.sliderDots {
+    text-align: center;
+    grid-area: dots;
+}
+
+.dot {
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    margin: 0 5px;
+    background-color: #ffe773;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.dotActive {
+    background-color: var(--primary);
+    height: 15px;
+    width: 15px;
 }
 
 .header {
@@ -74,4 +97,48 @@
 
 .btnRight {
     margin-left: 20px;
+}
+
+@media (max-width: 1423px) {
+    .sliderBlock {
+        grid-template-columns: auto 893px auto;
+        margin-left: 0;
+    }
+
+    .slider {
+        margin-left: 0;
+    }
+
+    .imgs {
+        overflow: hidden;
+        flex-basis: 774px;
+    }
+
+    .text {
+        width: auto;
+    }
+}
+
+@media (max-width: 960px) {
+    .sliderBlock {
+        grid-template-columns: auto 506px auto;
+        margin-left: 0;
+    }
+
+    .imgs {
+        overflow: hidden;
+        flex-basis: 387px;
+    }
+
+    .sliderHeader {
+        text-align: center;
+    }
+
+    .sliderText {
+        text-align: center;
+    }
+
+    .button {
+        margin: 0 auto;
+    }
 }
