@@ -1,1 +1,1 @@
-# Web-sale React App
+# Web-sale project React App
