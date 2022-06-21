@@ -143,11 +143,14 @@
 			"header"
 			"body"
 			"footer";
+
+		gap: 50px 0;
 	}
 
 	.helpIconRightBlackHeader {
-		top: -115px;
+		top: -5px;
 		width: 405px;
+		height: 146px;
 	}
 
 	.helpIconLeftBlack {
@@ -168,18 +171,16 @@
 }
 
 @media (max-width: 575px) {
+	.wrapper {
+		gap: 80px 0;
+	}
+
 	.header {
 		grid-template-columns: 132px auto 360px;
 	}
 
 	.helpIconRightBlackHeader {
-		top: -107px;
-		width: 580px;
-	}
-}
-
-@media (max-width: 400px) {
-	.helpIconRightBlackHeader {
-		width: 418px;
+		top: -7px;
+		width: 910px;
 	}
 }

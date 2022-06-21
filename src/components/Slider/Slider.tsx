@@ -11,44 +11,77 @@ import cn from "classnames";
 import {Htag} from "../Htag/Htag";
 import {P} from "../P/P";
 import {useMathMedia} from "../../hooks/useMathMedia";
-import {FC, useState} from "react";
+import {FC, useEffect, useRef, useState} from "react";
 
-const IMG_WIDTH = 387;
+const [IMG_WIDTH_BIG, IMG_WIDTH_SMALL]: number[] = [387, 200];
 
 export const Slider: FC<SliderProps> = () => {
     const [value, setValue] = useState(0);
-    const { isMobile } = useMathMedia();
+    const [side, setSide] = useState('left');
+    const {isMobile, isTablet, isDesktop} = useMathMedia();
+    const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
+    const sliderValuesRef = useRef({value, side, isMobile, isTablet, isDesktop});
 
-    // const img = [
-    //     <img key={slide1} src={slide1} alt=''/>,
-    //     <img key={slide2} src={slide2} alt=''/>,
-    //     <img key={slide3} src={slide3} alt=''/>,
-    //     <img key={slide4} src={slide4} alt=''/>,
-    //     <img key={slide5} src={slide5} alt=''/>,
-    //     <img key={slide6} src={slide6} alt=''/>
-    // ];
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            setupSide();
+        }, 1000);
+        return () => clearInterval(intervalRef.current);
+    }, []);
 
-    // Индекс текущего слайда
-//     const [activeIndex, setActiveIndex] = useState(0);
-//
-//     const intervalRef = useRef<ReturnType<typeof setInterval> | undefined>();
-//
-// // Хук Effect
-//     useEffect(() => {
-//         // Запускаем интервал
-//         intervalRef.current = setInterval(() => {
-//             // Меняем состояние
-//             setActiveIndex((current) => {
-//                 // Вычисляем и возвращаем индекс следующего слайда, который должен вывестись
-//                 return current === img.length - 1 ? 0 : current + 1;
-//             });
-//         }, 3000);
-// // Выключаем интервал
-//         return () => clearInterval(intervalRef.current);
-//     }, []);
+    useEffect(() => {
+        sliderValuesRef.current = {value, side, isMobile, isTablet, isDesktop};
+    }, [value, side, isMobile, isTablet, isDesktop]);
 
-    const prevSlide = () => value < 3 && setValue(value + 1);
+    function setupSide() {
+        const {value, side, isMobile, isTablet, isDesktop} = sliderValuesRef.current;
+        if (isMobile || isTablet) {
+            if (value === 5) {
+                setSide('left');
+                setValue((current) => current - 1);
+            } else if (value === 0) {
+                setSide('right');
+                setValue((current) => current + 1);
+            } else if (side === 'left') {
+                setValue((current) => current - 1);
+            } else if (side === 'right') {
+                setValue((current) => current + 1);
+            }
+        } else if (isDesktop) {
+            if (value === 4) {
+                setSide('left');
+                setValue((current) => current - 1);
+            } else if (value === 0) {
+                setSide('right');
+                setValue((current) => current + 1);
+            } else if (side === 'left') {
+                setValue((current) => current - 1);
+            } else if (side === 'right') {
+                setValue((current) => current + 1);
+            }
+        } else {
+            if (value === 3) {
+                setSide('left');
+                setValue((current) => current - 1);
+            } else if (value === 0) {
+                setSide('right');
+                setValue((current) => current + 1);
+            } else if (side === 'left') {
+                setValue((current) => current - 1);
+            } else if (side === 'right') {
+                setValue((current) => current + 1);
+            }
+        }
+    }
+
+    const prevSlide = () => value < sliderValue() && setValue(value + 1);
     const nextSlide = () => value !== 0 && setValue(value - 1);
+    const sliderValue = (): number => {
+        if (isMobile) return 5;
+        else if (isTablet) return 5;
+        else if (isDesktop) return 4;
+        else return 3;
+    };
 
     return (
         <div className={styles.sliderBlock}>
@@ -58,10 +91,10 @@ export const Slider: FC<SliderProps> = () => {
             </P>
             <div className={styles.slider}>
                 <Button className={`${cn({
-                    [styles.hidden]: value === 3,
+                    [styles.hidden]: value === sliderValue(),
                 })} ${styles.btnLeft}`} appearance="ghost" arrow='left' onClick={prevSlide}></Button>
                 <div className={styles.imgs}>
-                    <ul style={{transform: `translateX(-${value * IMG_WIDTH}px)`}}>
+                    <ul style={{transform: `translateX(-${value * (isMobile ? IMG_WIDTH_SMALL : IMG_WIDTH_BIG)}px)`}}>
                         <li>
                             <img src={slide1} alt="slide4"/>
                             <Htag tag='h3' className={styles.sliderHeader}>Создание сайтов</Htag>
@@ -116,27 +149,27 @@ export const Slider: FC<SliderProps> = () => {
                     [styles.hidden]: value === 0,
                 })} ${styles.btnRight}`} appearance="ghost" arrow='right' onClick={nextSlide}></Button>
             </div>
-            {isMobile &&
+            {(isMobile || isTablet) &&
                 <div className={styles.sliderDots}>
                 <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 1
-                })}`} onClick={() => console.log('hello')}></span>
-                <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 2
-                })}`} onClick={() => console.log('hello')}></span>
-                <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 3
-                })}`} onClick={() => console.log('hello')}></span>
-                <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 4
-                })}`} onClick={() => console.log('hello')}></span>
-                <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 5
-                })}`} onClick={() => console.log('hello')}></span>
-                <span className={`${styles.dot} ${cn({
-                    [styles.dotActive]: value === 6
-                })}`} onClick={() => console.log('hello')}></span>
-            </div>
+                    [styles.dotActive]: value === 0
+                })}`} onClick={() => setValue(0)}></span>
+                    <span className={`${styles.dot} ${cn({
+                        [styles.dotActive]: value === 1
+                    })}`} onClick={() => setValue(1)}></span>
+                    <span className={`${styles.dot} ${cn({
+                        [styles.dotActive]: value === 2
+                    })}`} onClick={() => setValue(2)}></span>
+                    <span className={`${styles.dot} ${cn({
+                        [styles.dotActive]: value === 3
+                    })}`} onClick={() => setValue(3)}></span>
+                    <span className={`${styles.dot} ${cn({
+                        [styles.dotActive]: value === 4
+                    })}`} onClick={() => setValue(4)}></span>
+                    <span className={`${styles.dot} ${cn({
+                        [styles.dotActive]: value === 5
+                    })}`} onClick={() => setValue(5)}></span>
+                </div>
             }
         </div>
     );

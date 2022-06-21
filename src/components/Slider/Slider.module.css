@@ -26,6 +26,7 @@
 .sliderDots {
     text-align: center;
     grid-area: dots;
+    margin-bottom: 50px;
 }
 
 .dot {
@@ -119,6 +120,12 @@
     }
 }
 
+@media (max-width: 1353px) {
+    .sliderBlock {
+        margin-top: 30px;
+    }
+}
+
 @media (max-width: 960px) {
     .sliderBlock {
         grid-template-columns: auto 506px auto;
@@ -128,6 +135,14 @@
     .imgs {
         overflow: hidden;
         flex-basis: 387px;
+    }
+
+    .header {
+        text-align: center;
+    }
+
+    .text {
+        text-align: center;
     }
 
     .sliderHeader {
@@ -140,5 +155,49 @@
 
     .button {
         margin: 0 auto;
+    }
+}
+
+@media (max-width: 575px) {
+    .sliderBlock {
+        grid-template-columns: auto 319px auto;
+        margin-left: 0;
+    }
+
+    .imgs {
+        overflow: hidden;
+        flex-basis: 200px;
+    }
+
+    .imgs ul li img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .imgs ul li {
+        margin: 0;
+    }
+
+    .sliderHeader {
+        height: 68px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .sliderText {
+        width: 200px;
+        height: 140px;
+        margin: 0;
+    }
+
+    .text {
+        font-size: 21px;
+        line-height: 30px;
+    }
+
+    .header {
+        font-size: 50px;
+        line-height: 50px;
     }
 }

@@ -1,13 +1,14 @@
 import {useState, useLayoutEffect} from "react";
 
 const queries = [
-    '(max-width: 960px)',
-    '(min-width: 767px) and (max-width: 1199px)',
-    '(min-width: 1200px)'
+    '(max-width: 560px)',
+    '(min-width: 561px) and (max-width: 960px)',
+    '(min-width: 961px) and (max-width: 1423px)',
+    '(min-width: 1424px)'
 ];
 
-export const useMathMedia = (): {isMobile: boolean, isTablet: boolean, isDesktop: boolean} => {
-    // if (typeof window === 'undefined') return {}; // in case SSR
+export const useMathMedia = (): {isMobile: boolean, isTablet: boolean, isDesktop: boolean, isWideScreen: boolean} | Record<string, never> => {
+    if (typeof window === 'undefined') return {}; // in case SSR
 
     const mediaQueryLists = queries.map(query => matchMedia(query));
 
@@ -23,15 +24,12 @@ export const useMathMedia = (): {isMobile: boolean, isTablet: boolean, isDesktop
         return () => mediaQueryLists.forEach(mql => mql.removeEventListener('change', handler));
     });
 
-
-    // return ['isMobile', 'isTablet', 'isDesktop'].reduce((acc, screen, index) => ({
-    //     ...acc,
-    //     [screen]: values[index]
-    // }), {});
-
+    const [isMobile, isTablet, isDesktop, isWideScreen] = values;
+    // console.log(isMobile, isTablet, isDesktop, isWideScreen);
     return {
-        'isMobile': values[0],
-        'isTablet': values[1],
-        'isDesktop': values[2]
+        isMobile,
+        isTablet,
+        isDesktop,
+        isWideScreen
     };
 };
