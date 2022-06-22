@@ -5,6 +5,7 @@ import {withLayout} from "./layout/Layout";
 import {CalculateComponent} from "./components/CalculateComponent/CalculateComponent";
 import {DescriptionComponent} from "./components/DescriptionComponent/DescriptionComponent";
 import {Slider} from "./components/Slider/Slider";
+import {FeedBack} from "./components/FeedBack/FeedBack";
 
 const App: FC = (): JSX.Element => {
     return (
@@ -12,6 +13,7 @@ const App: FC = (): JSX.Element => {
             <CalculateComponent />
             <DescriptionComponent />
             <Slider />
+            <FeedBack />
             {/*<Button appearance={"primary"} className='hello-world'>Нажмика</Button>*/}
             {/*<Button appearance={"ghost"}>Нажмика</Button>*/}
             {/*<Button appearance={"primary"} volume={"standard"}>Нажмика</Button>*/}

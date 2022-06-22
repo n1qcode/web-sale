@@ -1,17 +1,19 @@
 import {HeaderProps} from "./Header.props";
 import styles from "./Header.module.css";
 import cn from 'classnames';
-import FooterLogo from "../Footer/logo-footer.svg";
-import FooterLogoText from "../Footer/text-footer.svg";
+import logoHeader from "./logoHeader.png";
+import logoHeaderPrime from "./logoHeaderPrim.png";
 import {Button, MenuBurger, P} from "../../components";
 import React, {FC} from "react";
+import {useMathMedia} from "../../hooks/useMathMedia";
 
 export const Header: FC<HeaderProps> = ({className}) => {
+    const {isMobile, isTablet} = useMathMedia();
+
     return (
         <header className={cn(className, styles.header)}>
             <div className={styles.logo}>
-                <img className={styles.logoIcon} src={FooterLogo} alt={''}/>
-                <img className={styles.logoText} src={FooterLogoText} alt={''}/>
+                <img src={`${(isMobile || isTablet) ? logoHeaderPrime : logoHeader}`} alt=""/>
             </div>
             <div className={styles.buttons}>
                 <Button appearance={"ghost"}>О нас</Button>

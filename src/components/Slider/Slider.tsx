@@ -25,7 +25,7 @@ export const Slider: FC<SliderProps> = () => {
     useEffect(() => {
         intervalRef.current = setInterval(() => {
             setupSide();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(intervalRef.current);
     }, []);
 

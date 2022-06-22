@@ -1,8 +1,7 @@
 import {FooterProps} from "./Footer.props";
 import styles from "./Footer.module.css";
 import cn from 'classnames';
-import FooterLogo from "./logo-footer.svg";
-import FooterLogoText from "./text-footer.svg";
+import logoFooterPrime from "./logoFooterPrim.png";
 import {Button, P} from "../../components";
 import React from "react";
 
@@ -10,8 +9,7 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
             return (
                 <footer className={cn(className, styles.footer)} {...props}>
                     <div className={styles.logo}>
-                        <img className={styles.logoIcon} src={FooterLogo} alt={''}/>
-                        <img className={styles.logoText} src={FooterLogoText} alt={''}/>
+                        <img src={logoFooterPrime} alt=""/>
                     </div>
                     <div className={styles.buttons}>
                     <Button appearance={"ghost"}>О нас</Button>
@@ -26,5 +24,3 @@ export const Footer = ({ className, ...props }: FooterProps): JSX.Element => {
                 </footer>
             );
 };
-
-

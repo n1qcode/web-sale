@@ -14,24 +14,9 @@
 }
 
 .logo {
-	display: grid;
 	grid-area: logo;
-	grid-template-columns: repeat(3, auto);
-	grid-template-rows: repeat(2, auto);
-	grid-template-areas:
-		". icon ."
-		"text text text";
-
+	display: flex;
 	justify-content: center;
-	gap: 13px 0;
-}
-
-.logoIcon {
-	grid-area: icon;
-}
-
-.logoText {
-	grid-area: text;
 }
 
 .buttons {

@@ -25,7 +25,7 @@ export const useMathMedia = (): {isMobile: boolean, isTablet: boolean, isDesktop
     });
 
     const [isMobile, isTablet, isDesktop, isWideScreen] = values;
-    // console.log(isMobile, isTablet, isDesktop, isWideScreen);
+    console.log(isMobile, isTablet, isDesktop, isWideScreen);
     return {
         isMobile,
         isTablet,
