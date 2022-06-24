@@ -24,7 +24,7 @@ export const Slider: FC<SliderProps> = () => {
 
     useEffect(() => {
         intervalRef.current = setInterval(() => {
-            setupSide();
+            carousel();
         }, 3000);
         return () => clearInterval(intervalRef.current);
     }, []);
@@ -33,49 +33,34 @@ export const Slider: FC<SliderProps> = () => {
         sliderValuesRef.current = {value, side, isMobile, isTablet, isDesktop};
     }, [value, side, isMobile, isTablet, isDesktop]);
 
-    function setupSide() {
+    function carousel() {
         const {value, side, isMobile, isTablet, isDesktop} = sliderValuesRef.current;
         if (isMobile || isTablet) {
-            if (value === 5) {
-                setSide('left');
-                setValue((current) => current - 1);
-            } else if (value === 0) {
-                setSide('right');
-                setValue((current) => current + 1);
-            } else if (side === 'left') {
-                setValue((current) => current - 1);
-            } else if (side === 'right') {
-                setValue((current) => current + 1);
-            }
+            moveSlides(value, side,5);
         } else if (isDesktop) {
-            if (value === 4) {
-                setSide('left');
-                setValue((current) => current - 1);
-            } else if (value === 0) {
-                setSide('right');
-                setValue((current) => current + 1);
-            } else if (side === 'left') {
-                setValue((current) => current - 1);
-            } else if (side === 'right') {
-                setValue((current) => current + 1);
-            }
+            moveSlides(value,side,4);
         } else {
-            if (value === 3) {
-                setSide('left');
-                setValue((current) => current - 1);
-            } else if (value === 0) {
-                setSide('right');
-                setValue((current) => current + 1);
-            } else if (side === 'left') {
-                setValue((current) => current - 1);
-            } else if (side === 'right') {
-                setValue((current) => current + 1);
-            }
+            moveSlides(value, side,3);
+        }
+    }
+
+    function moveSlides(value, side, slide) {
+        if (value === slide) {
+            setSide('left');
+            setValue((current) => current - 1);
+        } else if (value === 0) {
+            setSide('right');
+            setValue((current) => current + 1);
+        } else if (side === 'left') {
+            setValue((current) => current - 1);
+        } else if (side === 'right') {
+            setValue((current) => current + 1);
         }
     }
 
     const prevSlide = () => value < sliderValue() && setValue(value + 1);
     const nextSlide = () => value !== 0 && setValue(value - 1);
+
     const sliderValue = (): number => {
         if (isMobile) return 5;
         else if (isTablet) return 5;
