@@ -7,62 +7,59 @@ import React, {FC, useEffect, useRef, useState} from "react";
 import {Button} from "../Button/Button";
 import FeedbackLogo from './feedback.png';
 
+const NAME_REGEXP = /^[a-zа-я]+$/i;
+const PHONE_REGEXP = /(^\+?[0-9]{3}[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$)|(^\+?[(][0-9]{3}[)][-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$)/im;
+const MAIL_REGEXP = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 export const FeedBack: FC<FeedBackProps> = () => {
     // const {isMobile, isTablet, isDesktop} = useMathMedia();
     const [name, setName] = useState('');
-    const [phone, setPhone] = useState('');
-    const [mail, setMail] = useState('');
-    const [message, setMessage] = useState('');
     const [nameDirty, setNameDirty] = useState(false);
-    const [phoneDirty, setPhoneDirty] = useState(false);
-    const [mailDirty, setMailDirty] = useState(false);
-    const [messageDirty, setMessageDirty] = useState(false);
     const [nameError, setNameError] = useState('Как можно к вам обращаться?');
+    const [nameSubmitError, setNameSubmitError] = useState(false);
+    const [phone, setPhone] = useState('');
+    const [phoneDirty, setPhoneDirty] = useState(false);
     const [phoneError, setPhoneError] = useState('Не забудьте указать номер');
+    const [phoneSubmitError, setPhoneSubmitError] = useState(false);
+    const [mail, setMail] = useState('');
+    const [mailDirty, setMailDirty] = useState(false);
     const [mailError, setMailError] = useState('Оставьте пожалуйста контакты для обратной связи');
-    const [messageError, setMessageError] = useState('Оставьте пожалуйста ваши пожелания');
+    const [mailSubmitError, setMailSubmitError] = useState(false);
+    const [message, setMessage] = useState('');
+    const [messageDirty, setMessageDirty] = useState(false);
+    const [messageError, setMessageError] = useState('Напишите пожалуйста ваши пожелания');
+    const [messageSubmitError, setMessageSubmitError] = useState(false);
+    const [personalCheck, setPersonalCheck] = useState(false);
+    const [personalError, setPersonalError] = useState(false);
     const [formValid, setFormValid] = useState(false);
     const [formData, setFormData] = useState({});
-    const counterRef = useRef(formData);
+    const [counterId, setCounterId] = useState(0);
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
     useEffect(() => {
-       if (nameError || phoneError || mailError || messageError) {
-           setFormValid(false);
-       } else {
-           setFormValid(true);
-       }
-    }, [nameError, phoneError, mailError, messageError]);
+        if (nameError || phoneError || mailError || messageError || personalError) {
+            setFormValid(false);
+        } else {
+            setFormValid(true);
+        }
+    }, [nameError, phoneError, mailError, messageError, personalError]);
 
     useEffect(() => {
-        setFormData({
-            "id": counterRef.current,
-            "name": name,
-            "phone": phone,
-            "contacts": mail,
-            "message": message
-        });
-    }, [name, phone, mail, message]);
-
-    let idCounter = makeCounter();
-
-    function makeCounter() {
-        let value = 0;
-        return function() {
-            return value = value + 1;
-        };
-    }
+        console.log(JSON.stringify(formData));
+    }, [formData]);
 
     useEffect(() => {
-        counterRef.current = idCounter();
-    }, [idCounter]);
+        fixTextarea();
+    }, [message]);
 
     const nameHandler = (e) => {
         setName(e.target.value);
-        const re = /^[a-z ,.'-]+$/i;
-        if (!re.test(String(e.target.value).toLowerCase())) {
-            e.target.value.replace(/^[a-z ,.'-]+$/i);
-            setNameError('Некорректное имя');
+        if (!NAME_REGEXP.test(String(e.target.value).toLowerCase())) {
+            if (e.target.value.length > 0) {
+                setNameError('Некорректное имя');
+            } else {
+                setNameError('Как можно к вам обращаться?');
+            }
         } else {
             setNameError('');
         }
@@ -70,9 +67,12 @@ export const FeedBack: FC<FeedBackProps> = () => {
 
     const phoneHandler = (e) => {
         setPhone(e.target.value);
-        const re = /^\+?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im;
-        if (!re.test(String(e.target.value).toLowerCase())) {
-            setPhoneError('Некорректный номер');
+        if (!PHONE_REGEXP.test(String(e.target.value).toLowerCase())) {
+            if (e.target.value.length > 0) {
+                setPhoneError('Некорректный номер');
+            } else {
+                setPhoneError('Не забудьте указать номер');
+            }
         } else {
             setPhoneError('');
         }
@@ -80,9 +80,12 @@ export const FeedBack: FC<FeedBackProps> = () => {
 
     const mailHandler = (e) => {
         setMail(e.target.value);
-        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if (!re.test(String(e.target.value).toLowerCase())) {
-            setMailError('Некорректные контактные данные');
+        if (!MAIL_REGEXP.test(String(e.target.value).toLowerCase())) {
+            if (e.target.value.length > 0) {
+                setMailError('Некорректные контактные данные');
+            } else {
+                setMailError('Оставьте пожалуйста контакты для обратной связи');
+            }
         } else {
             setMailError('');
         }
@@ -90,11 +93,23 @@ export const FeedBack: FC<FeedBackProps> = () => {
 
     const messageHandler = (e) => {
         setMessage(e.target.value);
-        const re = /^[a-z ,.'-]+$/i;
-        if (!re.test(String(e.target.value).toLowerCase())) {
-            setMessageError('В сообщении присутствуют недопустимые символы');
+        if (!NAME_REGEXP.test(String(e.target.value).toLowerCase())) {
+            if (e.target.value.length > 0) {
+                setMessageError('В сообщении присутствуют недопустимые символы');
+            } else {
+                setMessageError('Напишите пожалуйста ваши пожелания');
+            }
         } else {
             setMessageError('');
+        }
+    };
+
+    const personalHandler = () => {
+        setPersonalCheck(!personalCheck);
+        if (!personalCheck) {
+            setPersonalError(false);
+        } else {
+            setPersonalError(true);
         }
     };
 
@@ -116,33 +131,75 @@ export const FeedBack: FC<FeedBackProps> = () => {
         }
     };
 
+    const submit = () => {
+        if (formValid) {
+            setCounterId(counterId + 1);
+            setFormData({
+                id: counterId,
+                name,
+                phone,
+                mail,
+                message
+            });
+            // отправляем на сервер и проверяем статус, если все ок, то выполняем:
+            setName('');
+            setPhone('');
+            setMail('');
+            setMessage('');
+            setPersonalError(false);
+            setPersonalCheck(false);
+        } else {
+            if (!nameDirty || nameError) setNameSubmitError(true);
+            if (!phoneDirty || phoneError) setPhoneSubmitError(true);
+            if (!mailDirty || mailError) setMailSubmitError(true);
+            if (!messageDirty || messageError) setMessageSubmitError(true);
+            if (!personalCheck) setPersonalError(true);
+        }
+    };
+
+    function fixTextarea() {
+        const textarea = textareaRef.current;
+        if (!textarea) return;
+        if (textarea.clientHeight > 70) return;
+
+        textarea.style.height = '1px';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
+
     return (
         <div className={styles.feedbackBlock}>
             <Htag tag='h2' className={styles.header}>Хотите качественный сайт без головной боли?</Htag>
             <P size="l" className={styles.text}>Оставьте заявку и мы свяжемся с вами для обсуждения вашего проекта.</P>
             <div className={styles.feedback}>
-                <input onChange={e => nameHandler(e)} value={name} onBlur={e => blurHandler(e)} name={"name"}
+                <input onChange={nameHandler} value={name} onBlur={blurHandler} name={"name"}
                        type={"name"} className={styles.name}
                        placeholder="Ваше имя"/>
-                {(nameDirty && nameError) && <div className={styles.nameError}>{nameError}</div>}
-                <input onChange={e => phoneHandler(e)} value={phone} onBlur={e => blurHandler(e)} name={"phone"}
+                {(nameSubmitError || (nameDirty && nameError)) && <div className={styles.nameError}>{nameError}</div>}
+                <input onChange={phoneHandler} value={phone} onBlur={blurHandler} name={"phone"}
                        type={"tel"} className={styles.phone}
                        placeholder="Телефон"/>
-                {(phoneDirty && phoneError) && <div className={styles.phoneError}>{phoneError}</div>}
-                <input onChange={e => mailHandler(e)} value={mail} onBlur={e => blurHandler(e)} name={"email"}
+                {(phoneSubmitError || (phoneDirty && phoneError)) &&
+                    <div className={styles.phoneError}>{phoneError}</div>}
+                <input onChange={mailHandler} value={mail} onBlur={blurHandler} name={"email"}
                        type={"email"} className={styles.mail}
                        placeholder="Куда вам написать (почта, телеграмм)"/>
-                {(mailDirty && mailError) && <div className={styles.mailError}>{mailError}</div>}
-                <textarea onChange={e => messageHandler(e)} value={message} onBlur={e => blurHandler(e)} name={"message"}
+                {(mailSubmitError || (mailDirty && mailError)) && <div className={styles.mailError}>{mailError}</div>}
+                <textarea ref={textareaRef} onChange={messageHandler} value={message} onBlur={blurHandler}
+                          name={"message"}
                           className={styles.message} placeholder="Сообщение"></textarea>
-                {(messageDirty && messageError) && <div className={styles.messageError}>{messageError}</div>}
+                {(messageSubmitError || (messageDirty && messageError)) &&
+                    <div className={styles.messageError}>{messageError}</div>}
             </div>
             <div className={styles.personal}>
-                <input className={styles.checkbox} type="checkbox" id='check'/>
+                <input checked={personalCheck} onChange={personalHandler} className={styles.checkbox} type="checkbox"
+                       id='check'/>
                 <label htmlFor="check">Я согласен с условиями обработки</label> <a className={styles.link} href="#">персональных
                 данных</a>
             </div>
-            <Button disabled={!formValid} onClick={() => console.log(JSON.stringify(formData))} className={styles.button} appearance={"primary"} volume={"standard"}>Отправить</Button>
+            {personalError &&
+                <div className={styles.personalError}>Необходимо ваше согласие</div>}
+            <Button onClick={submit} className={styles.button} appearance={"primary"}
+                    volume={"standard"}>Отправить</Button>
             <img className={styles.logo} src={FeedbackLogo} alt=""/>
         </div>
     );

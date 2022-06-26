@@ -7,13 +7,14 @@
 
 	margin-top: 70px;
 	grid-template-columns: auto 648px 550px;
-	grid-template-rows: 125px 70px 190px 30px auto;
+	grid-template-rows: 125px 70px 190px 30px 30px auto;
 
 	grid-template-areas:
 		". header logo ."
 		". text logo ."
 		". feedback logo ."
 		". personal logo ."
+		". personalError logo ."
 		". button logo .";
 	gap: 35px;
 }
@@ -45,7 +46,7 @@
 		"message message"
 		"messageError messageError";
 
-	gap: 5px 60px;
+	gap: 0 60px;
 }
 
 .name {
@@ -117,6 +118,7 @@
 	color: red;
 
 	font-size: 15px;
+	margin-bottom: 5px;
 }
 
 .phoneError {
@@ -125,6 +127,7 @@
 	color: red;
 
 	font-size: 15px;
+	margin-bottom: 5px;
 }
 
 .mailError {
@@ -133,6 +136,7 @@
 	color: red;
 
 	font-size: 15px;
+	margin-bottom: 5px;
 }
 
 .messageError {
@@ -141,6 +145,10 @@
 	color: red;
 
 	font-size: 15px;
+}
+
+.personalError {
+	grid-area: personalError;
 }
 
 .personal {
