@@ -1,3 +1,3 @@
-import {DetailedHTMLProps, InputHTMLAttributes} from "react";
+import {inputTypes} from "../../hooks/useInput";
 
-export interface InputProps extends DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>{}
+export type InputProps = Omit<inputTypes, 'clear' | 'isValid'> & {placeholder: string, className: string, classNameError: string};

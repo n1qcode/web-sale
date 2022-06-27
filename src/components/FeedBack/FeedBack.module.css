@@ -6,15 +6,14 @@
 	display: grid;
 
 	margin-top: 70px;
-	grid-template-columns: auto 648px 550px;
-	grid-template-rows: 125px 70px 190px 30px 30px auto;
+	grid-template-columns: auto 648px 550px auto;
+	grid-template-rows: 125px 70px 190px 50px auto;
 
 	grid-template-areas:
 		". header logo ."
 		". text logo ."
 		". feedback logo ."
 		". personal logo ."
-		". personalError logo ."
 		". button logo .";
 	gap: 35px;
 }
@@ -116,6 +115,7 @@
 	grid-area: nameError;
 
 	color: red;
+	font-weight: 300;
 
 	font-size: 15px;
 	margin-bottom: 5px;
@@ -125,6 +125,7 @@
 	grid-area: phoneError;
 
 	color: red;
+	font-weight: 300;
 
 	font-size: 15px;
 	margin-bottom: 5px;
@@ -134,6 +135,7 @@
 	grid-area: mailError;
 
 	color: red;
+	font-weight: 300;
 
 	font-size: 15px;
 	margin-bottom: 5px;
@@ -143,26 +145,47 @@
 	grid-area: messageError;
 
 	color: red;
+	font-weight: 300;
 
 	font-size: 15px;
 }
 
 .personalError {
 	grid-area: personalError;
+	color: red;
+	font-weight: 300;
+
+	font-size: 15px;
 }
 
 .personal {
-	display: flex;
+	display: grid;
 	align-items: center;
 	justify-content: space-between;
 
+	grid-template-columns: repeat(3, auto);
+	grid-template-rows: repeat(2, auto);
+
+	grid-template-areas:
+		"checkbox label link"
+		"personalError personalError personalError";
+
 	width: 570px;
-	margin-top: 20px;
 
 	font-size: 18px;
 	font-weight: 300;
 	line-height: 22px;
 	grid-area: personal;
+	gap: 5px 0;
+}
+
+.label {
+	grid-area: label;
+}
+
+.link {
+	grid-area: link;
+	text-decoration: underline;
 }
 
 .button {
@@ -170,6 +193,7 @@
 
 	width: 184px;
 	height: 60px;
+	z-index: 1;
 }
 
 .logo {
@@ -178,10 +202,6 @@
 	position: absolute;
 	top: 140px;
 	left: -70px;
-}
-
-.link {
-	text-decoration: underline;
 }
 
 .checkbox {
@@ -246,4 +266,127 @@
 /* стили для чекбокса, находящегося в состоянии disabled */
 .checkbox:disabled + label::before {
 	background-color: #E9ECEF;
+}
+
+@media (max-width: 1390px) {
+	.feedbackBlock {
+		grid-template-columns: auto 648px auto;
+		grid-template-rows: 125px 70px 190px 50px auto 350px;
+
+		grid-template-areas:
+		". header ."
+		". text ."
+		". feedback ."
+		". personal ."
+		". button ."
+		". logo .";
+		gap: 35px;
+	}
+
+	.logo {
+		top: -100px;
+	}
+
+	.feedback {
+		grid-template-columns: 280px 280px;
+	}
+
+	.message {
+		max-width: 620px;
+	}
+}
+
+@media (max-width: 960px) {
+
+	.feedbackBlock {
+		grid-template-columns: auto 335px auto;
+		grid-template-rows: 125px 70px 260px 80px auto 200px;
+		gap: 15px;
+	}
+
+	.header {
+		font-size: 45px;
+		line-height: 45px;
+		text-align: center;
+	}
+
+	.text {
+		font-size: 20px;
+		line-height: 24px;
+		width: auto;
+		text-align: center;
+	}
+
+	.feedback {
+		display: grid;
+		grid-area: feedback;
+
+		grid-template-columns: 360px;
+		grid-template-rows: repeat(6, auto) minmax(35px, 75px) auto;
+
+		grid-template-areas:
+		"name"
+		"nameError"
+		"phone"
+		"phoneError"
+		"mail"
+		"mailError"
+		"message"
+		"messageError";
+
+		gap: 0 60px;
+	}
+
+	.message {
+		max-width: 360px;
+	}
+
+	.personal {
+		grid-template-columns: auto;
+		grid-template-rows: repeat(3, auto);
+
+		grid-template-areas:
+		"label"
+		"link"
+		"personalError";
+
+		width: 400px;
+	}
+
+	.link {
+		margin-left: 30px;
+	}
+
+	.personalError {
+		margin-left: 30px;
+	}
+
+	.logo {
+		top: -40px;
+		width: 340px;
+		left: 20px;
+	}
+
+}
+
+@media (max-width: 485px) {
+
+	.feedback {
+		grid-template-columns: 320px;
+	}
+
+	.name, .phone, .mail, .message {
+		font-size: 16px;
+	}
+
+	.personal {
+		width: 340px;
+		font-size: 16px;
+	}
+
+	.logo {
+		width: 330px;
+		left: 0;
+	}
+
 }
