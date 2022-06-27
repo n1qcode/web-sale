@@ -1,10 +1,13 @@
+import React, {FC} from "react";
 import {InputProps} from "./Input.props";
-import styles from './Input.module.css';
-import cn from 'classnames';
 
-export const Input = ({ className,...props }: InputProps): JSX.Element => {
+export const Input: FC<InputProps> = ({inputHandler, error, checkError, value, placeholder, className, classNameError}) => {
     return (
-        <input className={cn(className, styles.input)} {...props}/>
+        <>
+            <input onChange={inputHandler} value={value as string} onBlur={checkError} className={className}
+                   placeholder={placeholder}/>
+            {error && <div className={classNameError}>{error}</div>}
+        </>
     );
 };
 
