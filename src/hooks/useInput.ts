@@ -1,19 +1,19 @@
 import React, {useEffect, useRef, useState} from "react";
 
-export interface inputTypes {
+export interface inputAndTextareaTypes {
     clear: () => void,
     error: string,
     inputHandler: (e: React.ChangeEvent<input>) => void,
     checkError: () => void,
     value: string | boolean,
-    isValid: () => boolean,
+    isValid: () => boolean
 }
 
 type input = HTMLInputElement | HTMLTextAreaElement;
 
 type arrayType<T> = [string, (value: T)=>boolean][];
 
-export default (initialValue: string | boolean, array: arrayType<string | boolean>): inputTypes => {
+export default (initialValue: string | boolean, array: arrayType<string | boolean>): inputAndTextareaTypes => {
     const [inputValue, setInputValue] = useState<string | boolean>(initialValue);
     const [error, setError] = useState<string>('');
     const isMount = useRef(true);

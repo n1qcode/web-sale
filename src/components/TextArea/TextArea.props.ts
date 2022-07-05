@@ -1,3 +1,7 @@
-import {DetailedHTMLProps, TextareaHTMLAttributes} from "react";
+import {inputAndTextareaTypes} from "../../hooks/useInput";
+import {InputAndTextareaProps} from "../Input/Input.props";
+import React from "react";
 
-export interface TextAreaProps extends DetailedHTMLProps<TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>{}
+export type TextAreaProps = Omit<InputAndTextareaProps, 'type'> & Omit<inputAndTextareaTypes, 'clear' | 'isValid'> & {
+    ref: React.MutableRefObject<HTMLTextAreaElement | null>;
+};

@@ -1,8 +1,8 @@
 import React, {useRef} from "react";
 
-type refType = [
+export type refType = [
     React.MutableRefObject<HTMLTextAreaElement | null>,
-    ()=>void
+    () => void
 ];
 
 export default (): refType => {
@@ -11,12 +11,12 @@ export default (): refType => {
     return [
         textareaRef,
         () => {
-        const textarea = textareaRef.current;
-        if (!textarea) return;
-        if (textarea.clientHeight > 70) return;
+            const textarea = textareaRef.current;
+            if (!textarea) return;
+            if (textarea.clientHeight > 70) return;
 
-        textarea.style.height = '1px';
-        textarea.style.height = textarea.scrollHeight + 'px';
-    }
+            textarea.style.height = '1px';
+            textarea.style.height = textarea.scrollHeight + 'px';
+        }
     ];
 };

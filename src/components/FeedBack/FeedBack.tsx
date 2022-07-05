@@ -10,6 +10,7 @@ import useFixTextArea from "../../hooks/useFixTextArea";
 import {MAIL_ERRORS, MESSAGE_ERRORS, NAME_ERRORS, PERSONAL_ERRORS, PHONE_ERRORS} from "./FeedBack.constants";
 import {Input} from "../Input/Input";
 import {useMathMedia} from "../../hooks/useMathMedia";
+import {TextArea} from "../TextArea/TextArea";
 
 export const FeedBack: FC<FeedBackProps> = () => {
     const name = useInput('', NAME_ERRORS);
@@ -43,20 +44,31 @@ export const FeedBack: FC<FeedBackProps> = () => {
 
     return (
         <div className={styles.feedbackBlock}>
-            <Htag tag='h2' className={styles.header}>{(isTablet || isMobile) ? 'Хотите сайт без головной боли?' : 'Хотите качественный сайт без головной боли?'}</Htag>
+            <Htag tag='h2'
+                  className={styles.header}>{(isTablet || isMobile) ? 'Хотите сайт без головной боли?' : 'Хотите качественный сайт без головной боли?'}</Htag>
             <P size="l" className={styles.text}>Оставьте заявку и мы свяжемся с вами для обсуждения вашего проекта.</P>
             <div className={styles.feedback}>
-                <Input inputHandler={name.inputHandler} value={name.value} className={styles.name} placeholder="Ваше имя" classNameError={styles.nameError} error={name.error} checkError={name.checkError} />
-                <Input inputHandler={phone.inputHandler} value={phone.value} className={styles.phone} placeholder="Телефон" classNameError={styles.phoneError} error={phone.error} checkError={phone.checkError} />
-                <Input inputHandler={mail.inputHandler} value={mail.value} className={styles.mail} placeholder="Куда вам написать (почта, телеграмм)" classNameError={styles.mailError} error={mail.error} checkError={mail.checkError} />
+                <Input inputHandler={name.inputHandler} value={name.value} className={styles.name}
+                       placeholder="Ваше имя" classNameError={styles.nameError} error={name.error}
+                       checkError={name.checkError} type={"text"} name={"name"}/>
+                <Input inputHandler={phone.inputHandler} value={phone.value} className={styles.phone}
+                       placeholder="Телефон" classNameError={styles.phoneError} error={phone.error}
+                       checkError={phone.checkError} type={"tel"} name={"phone"}/>
+                <Input inputHandler={mail.inputHandler} value={mail.value} className={styles.mail}
+                       placeholder="Куда вам написать (почта, телеграмм)" classNameError={styles.mailError}
+                       error={mail.error} checkError={mail.checkError} type={"email"} name={"email"}/>
+
+                <TextArea ref={ref} error={message.error} checkError={message.checkError} name={"message"}
+                          className={styles.message} classNameError={styles.messageError} value={message.value}
+                          placeholder={"Сообщение"} inputHandler={message.inputHandler}/>
 
 
-                <textarea ref={ref} onChange={message.inputHandler} value={message.value as string}
-                          onBlur={message.checkError}
-                          name={"message"}
-                          className={styles.message} placeholder="Сообщение"></textarea>
-                {message.error &&
-                    <div className={styles.messageError}>{message.error}</div>}
+                {/*<textarea ref={ref} onChange={message.inputHandler} value={message.value as string}*/}
+                {/*          onBlur={message.checkError}*/}
+                {/*          name={"message"}*/}
+                {/*          className={styles.message} placeholder="Сообщение"></textarea>*/}
+                {/*{message.error &&*/}
+                {/*    <div className={styles.messageError}>{message.error}</div>}*/}
             </div>
             <div className={styles.personal}>
                 <input checked={personal.value as boolean} onChange={personal.inputHandler} className={styles.checkbox}

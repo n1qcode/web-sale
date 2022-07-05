@@ -1,9 +1,13 @@
 import {TextAreaProps} from "./TextArea.props";
-import styles from './TextArea.module.css';
-import cn from 'classnames';
+import React, {FC} from "react";
 
-export const TextArea = ({ className,...props }: TextAreaProps): JSX.Element => {
+export const TextArea: FC<TextAreaProps> = ({inputHandler, checkError, value, name, error, placeholder, className, classNameError, ref}) => {
+
     return (
-        <textarea className={cn(className, styles.textArea)} {...props}/>
+        <>
+            <textarea ref={ref} className={className} placeholder={placeholder} onChange={inputHandler}
+                      value={value as string} onBlur={checkError} name={name}/>
+            {error && <div className={classNameError}>{error}</div>}
+        </>
     );
 };
