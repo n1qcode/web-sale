@@ -62,13 +62,6 @@ export const FeedBack: FC<FeedBackProps> = () => {
                           className={styles.message} classNameError={styles.messageError} value={message.value}
                           placeholder={"Сообщение"} inputHandler={message.inputHandler}/>
 
-
-                {/*<textarea ref={ref} onChange={message.inputHandler} value={message.value as string}*/}
-                {/*          onBlur={message.checkError}*/}
-                {/*          name={"message"}*/}
-                {/*          className={styles.message} placeholder="Сообщение"></textarea>*/}
-                {/*{message.error &&*/}
-                {/*    <div className={styles.messageError}>{message.error}</div>}*/}
             </div>
             <div className={styles.personal}>
                 <input checked={personal.value as boolean} onChange={personal.inputHandler} className={styles.checkbox}
